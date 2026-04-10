@@ -1,0 +1,15 @@
+FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y nodejs npm
+
+WORKDIR /nft-contract
+
+RUN rm -rf ./*
+
+COPY package*.json /nft-contract/
+
+RUN npm install
+
+COPY src /nft-contract/src/
+
+RUN npm run buildLinux
